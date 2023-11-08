@@ -1,0 +1,34 @@
+from rest_framework import serializers
+from .models import *
+
+
+class AsesorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Asesor
+        fields = '__all__'
+        read_only_field = ('FechaRegistro', 'Documento',)
+    Sexo = serializers.CharField(source='Sexo.Descripcion', read_only=True)
+    Jornada = serializers.CharField(source='Jornada.Descripcion', read_only=True)
+    Zonal = serializers.CharField(source='Zonal.Descripcion', read_only=True)
+    TipoTrabajo = serializers.CharField(source='TipoTrabajo.Descripcion', read_only=True)
+    Horario = serializers.CharField(source='Horario.Descripcion', read_only=True)
+    Capacitador = serializers.CharField(source='Capacitador.Descripcion', read_only=True)
+    Estado = serializers.CharField(source='Estado.Descripcion', read_only=True)
+    def validate_Documento(self, value):
+        # Verifica si ya existe un asesor con el mismo número de documento
+        if Asesor.objects.filter(Documento=value).exists():
+            raise serializers.ValidationError(
+                'Ya existe un asesor con este número de documento.')
+        return value
+
+
+class CapacitadorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Capacitador
+        fields = '__all__'
+
+
+class EvaluacionesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Evaluaciones
+        fields = '__all__'
