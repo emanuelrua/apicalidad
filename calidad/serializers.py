@@ -8,12 +8,17 @@ class AsesorSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_field = ('FechaRegistro', 'Documento',)
     Sexo = serializers.CharField(source='Sexo.Descripcion', read_only=True)
-    Jornada = serializers.CharField(source='Jornada.Descripcion', read_only=True)
+    Jornada = serializers.CharField(
+        source='Jornada.Descripcion', read_only=True)
     Zonal = serializers.CharField(source='Zonal.Descripcion', read_only=True)
-    TipoTrabajo = serializers.CharField(source='TipoTrabajo.Descripcion', read_only=True)
-    Horario = serializers.CharField(source='Horario.Descripcion', read_only=True)
-    Capacitador = serializers.CharField(source='Capacitador.Descripcion', read_only=True)
+    TipoTrabajo = serializers.CharField(
+        source='TipoTrabajo.Descripcion', read_only=True)
+    Horario = serializers.CharField(
+        source='Horario.Descripcion', read_only=True)
+    Capacitador = serializers.CharField(
+        source='Capacitador.Descripcion', read_only=True)
     Estado = serializers.CharField(source='Estado.Descripcion', read_only=True)
+
     def validate_Documento(self, value):
         # Verifica si ya existe un asesor con el mismo número de documento
         if Asesor.objects.filter(Documento=value).exists():
@@ -31,4 +36,42 @@ class CapacitadorSerializer(serializers.ModelSerializer):
 class EvaluacionesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Evaluaciones
+        fields = '__all__'
+
+
+class JornadaSerializers (serializers.ModelSerializer):
+    class Meta:
+        model = Jornada
+        fields = '__all__'
+
+
+class SexoSerializers (serializers.ModelSerializer):
+    class Meta:
+        model = Sexo
+        fields = '__all__'
+
+
+class ZonalSerializers (serializers.ModelSerializer):
+    class Meta:
+        model = Zonal
+        fields = '__all__'
+
+class TipoTrabajoSerializers (serializers.ModelSerializer):
+    class Meta:
+        model = TipoTrabajo
+        fields = '__all__'
+
+class HorarioSerializers (serializers.ModelSerializer):
+    class Meta:
+        model = Horario
+        fields = '__all__'
+
+class EstadoSerializers (serializers.ModelSerializer):
+    class Meta:
+        model = Estado
+        fields = '__all__'
+
+class CargoSerializers (serializers.ModelSerializer):
+    class Meta:
+        model = Cargo
         fields = '__all__'

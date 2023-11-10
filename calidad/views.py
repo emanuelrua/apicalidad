@@ -22,3 +22,40 @@ class EvaluacionesViewSet(viewsets.ModelViewSet):
     queryset = Evaluaciones.objects.all()
     permission_classes = [permissions.AllowAny]
     serializer_class = EvaluacionesSerializer
+
+class JornadaViewSet(viewsets.ModelViewSet):
+    queryset = Jornada.objects.all()
+    permission_classes = [permissions.AllowAny]
+    serializer_class = JornadaSerializers
+
+class SexoViewSet(viewsets.ModelViewSet):
+    queryset = Sexo.objects.all()
+    permission_classes = [permissions.AllowAny]
+    serializer_class = SexoSerializers
+
+class ZonalViewSet(viewsets.ModelViewSet):
+    queryset = Zonal.objects.all()
+    permission_classes = [permissions.AllowAny]
+    serializer_class = ZonalSerializers
+
+class TipoTrabajoViewSet(viewsets.ModelViewSet):
+    queryset = TipoTrabajo.objects.all()
+    permission_classes = [permissions.AllowAny]
+    serializer_class = TipoTrabajoSerializers
+
+class HorarioViewSet(viewsets.ModelViewSet):
+    queryset = Horario.objects.all()
+    permission_classes = [permissions.AllowAny]
+    serializer_class = HorarioSerializers
+
+class EstadoViewSet(viewsets.ModelViewSet):
+    queryset = Estado.objects.all()
+    permission_classes = [permissions.AllowAny]
+    serializer_class = EstadoSerializers
+
+class CargoViewSet(viewsets.ModelViewSet):
+    queryset = Cargo.objects.all()
+    permission_classes = [permissions.AllowAny]
+    serializer_class = CargoSerializers
+
+
