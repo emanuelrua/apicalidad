@@ -210,7 +210,7 @@ def cargo(request):
 
 class UserCreateView(generics.CreateAPIView):
     queryset = User.objects.all()
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = UserSerializer
 
 
