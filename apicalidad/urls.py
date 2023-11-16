@@ -17,9 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.documentation import include_docs_urls
+from calidad import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('calidad.urls')),
+    path('', views.signin, name='signin'),
+    path('index/', views.home, name='home'),
+    path('signup/', views.signup, name='signup'),
+    path('indexapi/', views.homeapi, name='homeapi'),
+    path ('logout/', views.signout, name='signout'),
+    path('signin/', views.signin, name='signin'),
     path('docs/', include_docs_urls(title='Api docs')),
+    path('api/', include('calidad.urls'))
 ]

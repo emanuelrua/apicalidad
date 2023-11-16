@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'coreapi',
     'calidad',
     'corsheaders',
+    'bootstrap5',
 ]
 
 MIDDLEWARE = [

@@ -1,3 +1,4 @@
+from django.shortcuts import render, redirect
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import *
@@ -9,6 +10,10 @@ from rest_framework.decorators import api_view
 from django.contrib.auth.decorators import login_required
 from rest_framework import status
 from rest_framework import views
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import User
+from django.contrib.auth import login, logout, authenticate
+from django.db import IntegrityError
 
 
 @api_view(['GET', 'POST'])
@@ -218,3 +223,64 @@ class UserDetailView(generics.RetrieveUpdateAPIView):
     queryset = User.objects.all()
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = UserSerializer
+
+
+# home page
+def home(request):
+    return render(request, 'index.html')
+
+# create user
+
+
+def signup(request):
+    if request.method == 'GET':
+        return render(request, 'signup.html', {
+            'form': UserCreationForm,
+        })
+    else:
+        if request.POST['password1'] == request.POST['password2']:
+            try:
+                user = User.objects.create_user(
+                    username=request.POST['username'], password=request.POST['password1'])
+                user.save()
+                login(request, user)
+                return redirect('homeapi')
+            except IntegrityError:
+                return render(request, 'signup.html', {
+                    'form': UserCreationForm,
+                    'error': 'Usuario ya existe'})
+        return render(request, 'signup.html', {
+            'form': UserCreationForm,
+            'error': 'Contraseñas no coinciden'})
+
+# home page
+
+
+def homeapi(request):
+    return render(request, 'indexapi.html')
+
+# logout
+
+
+def signout(request):
+    logout(request)
+    return redirect('home')
+
+# login
+
+
+def signin(request):
+    if request.method == 'GET':
+        return render(request, 'signin.html', {
+            'form': AuthenticationForm,
+        })
+    else:
+        user = authenticate(
+            request, username=request.POST['username'], password=request.POST['password'])
+        if user is None:
+            return render(request, 'signin.html', {
+            'form': AuthenticationForm,
+            'error': 'Usuario o contraseña incorrectos'})
+        else:
+            login(request,user)
+            return redirect('homeapi')
