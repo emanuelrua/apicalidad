@@ -7,9 +7,9 @@
     <form action="/signin/" method="POST">
         {% csrf_token %}
         {{form.as_p}}
-        <BUtton>
-            Signin
-        </BUtton>
+            <button class="btn btn-primary" type="submit">
+                Sign in
+            </button>
     </form>
     {{error}}
 

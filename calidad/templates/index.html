@@ -1,10 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>
-        <strong>Bienvenidos a Apicalidad</strong>
-    </h1>
-    <h2>
-        home basic
-    </h2>
+<main class="container p-10" style="background-color: darkgrey; border-radius: 10px; margin-top: 10px;">
+    <section>
+        <div class="card-header">
+            <h2 class="display-2 text-center">
+                <strong>Bienvenidos a Apicalidad</strong>
+            </h2>
+        </div>
+        <div class="card-boddy">
+            <p>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur in voluptatum, esse nam ad illum recusandae laborum quod voluptatem quisquam, harum nemo fugiat inventore placeat voluptatibus, natus iusto dolore repudiandae!
+            </p>
+            <div class="text-center">
+                <a class="btn btn-primary" href="/signup/">Signup</a>
+                <a class="btn btn-primary" href="/signin/">Login</a>
+            </div>
+        </div>
+    </section>
+</main>
+
 {% endblock %}

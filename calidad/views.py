@@ -253,9 +253,9 @@ def signup(request):
             'form': UserCreationForm,
             'error': 'Contraseñas no coinciden'})
 
-# home page
+# homeapi page
 
-
+@login_required
 def homeapi(request):
     return render(request, 'indexapi.html')
 
